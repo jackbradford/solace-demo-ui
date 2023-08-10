@@ -17,24 +17,26 @@ export const NotesList = () => {
   const onClick = (note: Note) => (e: React.MouseEvent) => {
     e.preventDefault();
     history.push(`/update/${note.id}`);
-    // Go to Note Form: /update/:id
   }
 
   const deleteNote = (note: Note) => (e: React.MouseEvent) => {
     e.preventDefault();
     _deleteNote(note.id).then(() => notes.fetchAll())
-      .catch(e => console.log("Could not delete:", e));
+      .catch(e => console.error("Could not delete:", e));
   }
 
   React.useEffect(() => {
-    notes.keyword
+    notes.keyword && notes.keyword.trim() !== ""
       ? notes.search(notes.keyword)
       : notes.fetchAll().then(response => {});
   }, []);
 
   return (
     <ul>
-      {notes.list.map(note => (
+      {notes.loading && (
+        <div className="lds-ripple"><div></div><div></div></div>
+      )}
+      {!notes.loading && notes.list.map(note => (
         <li key={note.id}>
           <div onClick={onClick(note)}>
             <h3>{note.title}</h3>

@@ -19,6 +19,7 @@ input, textarea {
 
 label {
   font-size: 0.8rem;
+  margin-left: 0.2rem;
 }
 
 section.add-note {
@@ -39,6 +40,10 @@ form.add-note {
     width: 100%;
     margin-top: 0.5rem;
     height: 2.25rem;
+
+    &:focus {
+      outline: 2px solid #3584e4;
+    }
   }
 }
 

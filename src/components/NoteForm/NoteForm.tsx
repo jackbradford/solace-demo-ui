@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { addNote, updateNote } from '../../lib/datasource';
-//import type { Note } from 'solace-demo-common/dist/types';
+import { noteIsValid } from 'solace-demo-common/dist';
 
 export type NoteFormT = {
   title: string
@@ -19,12 +19,15 @@ const initialForm = {
   body: ""
 }
 
+const ERR_MSG = "Title is required. Content must be at least 20 characters, and not more than 300.";
+
 export const NoteForm = (props?: NoteFormProps) => {
 
   const history = useHistory();
   const init = props?.initialState || initialForm;
   const update: boolean = !!props?.initialState;
   const [form, setForm] = React.useState<NoteFormT>(init);
+  const [error, setError] = React.useState<undefined|string>(undefined);
 
   const onChange = (key: keyof NoteFormT) => (
     (e: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => {
@@ -33,41 +36,49 @@ export const NoteForm = (props?: NoteFormProps) => {
     }
   );
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Submit...", form);
+    setError(undefined);
+    const isValid = await noteIsValid(form);
+    if (!isValid) {
+      setError(ERR_MSG);
+      return;
+    }
     if (update) {
       updateNote({ id: props.noteId, ...form })
-        .catch(e => {})
-        .finally(() => {
+        .then(() => {
           history.push("/");
-        });
+        })
+        .catch(e => setError(ERR_MSG))
     }
     else {
       addNote(form)
-        .catch(e => {})
-        .finally(() => {
+        .then(() => {
           history.push("/");
-        });
+        })
+        .catch(e => setError(ERR_MSG));
     }
   }
 
   return (
     <form className="add-note" onSubmit={onSubmit}>
-      <label htmlFor="title">{"Note Title"}</label>
+      <label htmlFor="title">{"Title"}</label>
       <input
         id="title"
         onChange={onChange("title")}
         type="text"
         value={form.title}
       />
-      <label htmlFor="body">{"Content"}</label>
+      <label htmlFor="body">{"Note"}</label>
       <textarea
         id="body"
         onChange={onChange("body")}
         value={form.body}
       />
-      <button type="submit">{"Submit"}</button>
+      <button className="submit-note" type="submit">{"Submit"}</button>
+      {error && (
+        <p className="error">{error}</p>
+      )}
     </form>
   );
 }

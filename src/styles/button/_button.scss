@@ -1,6 +1,21 @@
+button.submit-note,
+button.add-note {
+  background-color: #1d4339;
+  &:hover {
+    cursor: pointer;
+  }
+
+}
+
+button.submit-note {
+  color: #fff;
+  border: 1px solid #444;
+  outline: 0;
+  border-radius: 4px;
+}
+
 button.add-note {
 
-  background-color: #1d4339;
   border: 0;
   outline: 0;
   padding: 0.2rem;
@@ -13,10 +28,6 @@ button.add-note {
   position: absolute;
   bottom: 1rem;
   right: 1rem;
-
-  &:hover {
-    cursor: pointer;
-  }
 
   svg {
     width: 1.5rem;
