@@ -1,0 +1,51 @@
+form.search {
+  margin: 0 1rem;
+  position: relative;
+
+  input {
+    border: 1px solid #ccc;
+    border-radius: 1rem;
+    padding: 0 1rem;
+    padding-right: 2rem;
+    width: 100%;
+    height: 2rem;
+    background: snow;
+    color: #646464;
+
+    &:focus {
+      background: ghostwhite;
+      border: 0;
+      color: #444;
+    }
+  }
+
+  button[type="submit"] {
+    position: absolute;
+    right: 0.4rem;
+    top: 0.3rem;
+    width: 1.4rem;
+    height: 1.4rem;
+    background-color: transparent;
+    border: 0;
+    border-radius: 1rem;
+    //outline: 1px solid #444;
+    transition: background-color 1s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+      width: 1rem;
+      height: 1rem;
+    }
+
+    &:hover {
+      background-color: #ddd;
+      cursor: pointer;
+    }
+
+    &:focus {
+      background: ghostwhite;
+    }
+  }
+}
