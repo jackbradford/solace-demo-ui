@@ -1,6 +1,8 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { AppContext } from '../../';
+import { TrashIcon } from '../icons';
+import { deleteNote as _deleteNote } from '../../lib/datasource';
 import type { Note } from 'solace-demo-common/dist/types';
 
 export const NotesList = () => {
@@ -18,6 +20,12 @@ export const NotesList = () => {
     // Go to Note Form: /update/:id
   }
 
+  const deleteNote = (note: Note) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    _deleteNote(note.id).then(() => notes.fetchAll())
+      .catch(e => console.log("Could not delete:", e));
+  }
+
   React.useEffect(() => {
     notes.keyword
       ? notes.search(notes.keyword)
@@ -27,11 +35,18 @@ export const NotesList = () => {
   return (
     <ul>
       {notes.list.map(note => (
-        <li key={note.id} onClick={onClick(note)}>
-          <h3>{note.title}</h3>
-          <p>{formatContent(note.body)}</p>
-          <p className="date">{"Created: "+new Date(note.created_at).toLocaleString()}</p>
-          <p className="date">{"Updated: "+new Date(note.updated_at).toLocaleString()}</p>
+        <li key={note.id}>
+          <div onClick={onClick(note)}>
+            <h3>{note.title}</h3>
+            <p>{formatContent(note.body)}</p>
+            <p className="date">{"Created: "+new Date(note.created_at).toLocaleString()}</p>
+            <p className="date">{"Updated: "+new Date(note.updated_at).toLocaleString()}</p>
+          </div>
+          <div>
+            <button onClick={deleteNote(note)}>
+              <TrashIcon stroke={"maroon"} />
+            </button>
+          </div>
         </li>
       ))}
     </ul>

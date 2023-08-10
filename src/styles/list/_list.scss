@@ -5,6 +5,41 @@ ul {
 li {
   padding: 1rem;
   border-bottom: 1px solid #e0e0e0;
+  display: flex;
+
+  div:first-child {
+    flex-grow: 1;
+    padding-right: 1rem;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  div:last-child {
+    width: 2rem;
+
+    &, button {
+      display: flex;
+      align-items: center;
+    }
+
+    button {
+      width: 2rem;
+      height: 2rem;
+      border: 0;
+      border-radius: 5px;
+      background: none;
+      justify-content: center;
+      &:hover {
+        background: #e0e0e0;
+        cursor: pointer;
+      }
+      svg {
+        width: 1.25rem;
+        height: 1.25rem;
+      }
+    }
+  }
 
   &:last-child {
     border: 0;
@@ -28,7 +63,6 @@ li {
 
   &:hover {
     background: #f5f5f5;
-    cursor: pointer;
   }
 }
 
