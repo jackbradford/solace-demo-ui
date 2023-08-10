@@ -1,9 +1,12 @@
 import React from 'react';
 import { SearchIcon } from '../icons';
+import { AppContext } from '../../';
 
 export const SearchFilter = () => {
 
-  const [keyword, setKeyword] = React.useState<string>("");
+  const { notes } = React.useContext(AppContext);
+  const { keyword, setKeyword } = notes;
+  //const [keyword, setKeyword] = React.useState<string>("");
   const [loading, setLoading] = React.useState<boolean>(false);
 
   const onChangeKeyword = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -14,6 +17,7 @@ export const SearchFilter = () => {
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Submit");
+    notes.search(keyword);
     // get notes search function from context
   }
 

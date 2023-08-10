@@ -30,6 +30,10 @@ body {
   height: 100dvh;
   overflow: hidden;
 }
+main {
+  height: 100dvh;
+  overflow-y: scroll;
+}
 ol, ul {
 	list-style: none;
 }

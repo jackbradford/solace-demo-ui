@@ -1,22 +1,66 @@
+input, textarea {
+
+  border: 1px solid #ccc;
+  padding: 0 0.5rem;
+  font-size: 0.8rem;
+  font-family: $font-family;
+  width: 100%;
+  height: 2rem;
+  background: snow;
+  color: #646464;
+  margin-bottom: 0.5rem;
+
+  &:focus {
+    background: ghostwhite;
+    border: 0;
+    color: #444;
+  }
+}
+
+label {
+  font-size: 0.8rem;
+}
+
+section.add-note {
+  margin-top: 2rem;
+}
+
+form.add-note {
+  margin: 1rem 0;
+  input, textarea {
+    border-radius: 5px;
+  }
+
+  textarea {
+    height: 15rem;
+  }
+
+  button {
+    width: 100%;
+    margin-top: 0.5rem;
+    height: 2.25rem;
+  }
+}
+
+section {
+  margin: 0 1rem;
+}
+
+textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
 form.search {
   margin: 0 1rem;
   position: relative;
 
   input {
-    border: 1px solid #ccc;
     border-radius: 1rem;
     padding: 0 1rem;
     padding-right: 2rem;
-    width: 100%;
-    height: 2rem;
-    background: snow;
-    color: #646464;
-
-    &:focus {
-      background: ghostwhite;
-      border: 0;
-      color: #444;
-    }
   }
 
   button[type="submit"] {
@@ -45,7 +89,7 @@ form.search {
     }
 
     &:focus {
-      background: ghostwhite;
+      background: #e0e0e0;
     }
   }
 }
