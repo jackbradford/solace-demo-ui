@@ -29,6 +29,8 @@ body {
 	line-height: 1;
   height: 100dvh;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
 }
 main {
   height: 100dvh;
@@ -37,4 +39,8 @@ main {
 ol, ul {
 	list-style: none;
 }
-
+#app-container {
+  position: relative;
+  max-width: 500px;
+  flex-grow: 1;
+}
